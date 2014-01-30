@@ -1,6 +1,6 @@
-Super easy way to que up processes needing resources, or balls.
+Super easy way to queue up processes needing locks on resources, or balls in this metaphore
 
-You hold a ball and put it back when you're done. If you're waiting for a ball, no one can take it.
+You hold a ball and put it back when you're done. If you're waiting for a ball, no one else can take it.
 
 Web API:
 ========
@@ -22,6 +22,8 @@ GET /dude/put/ball
 GET /bro/hold/ball
 
 ```
+
+See test/test.coffee for examples
 
 
 Todo:
