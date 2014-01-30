@@ -100,6 +100,11 @@ setup_server = () ->
        
     res.send balls[ball_name]
 
+  app.get '/balls/:ball_name', (req, res) ->
+    ball_name = "#{req.params.ball_name}"
+    console.log "-- see #{ball_name}"
+    res.send balls[ball_name]
+
   app.use (req, res) ->
     console.log "-- unrecognized"
     res.status(404)

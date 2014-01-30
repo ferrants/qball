@@ -39,6 +39,18 @@ describe 'balls | ', () ->
 				ae data.ball_name, ball
 				cb()
 
+	it 'dude can hold a ball and bro can see that', (cb) ->
+		ball = @ball
+		get_json "/dude/hold/#{ball}", (status, data) ->
+			ae 200, status
+			ae data.holder, 'dude'
+			ae data.ball_name, ball
+			get_json "/balls/#{ball}", (status, data) ->
+				ae 200, status
+				ae data.holder, 'dude'
+				ae data.ball_name, ball
+				cb()
+
 	it 'bro can wait for dude', (cb) ->
 		ball = @ball
 		get_json "/dude/hold/#{ball}", (status, data) ->
