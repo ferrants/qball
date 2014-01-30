@@ -28,5 +28,7 @@ See test/test.coffee for examples
 
 Todo:
 =====
-- Request key
-- Timeout for next up
+- If compliance to the line isn't working, hide the list and allow people to request keys which they can use
+- Timeout for person who is next up
+- Intentionally made all the requests a GET for simplicity. This may change this at some point
+- Ready url to post to
