@@ -8,6 +8,9 @@ GET /[user]/hold/[ball]
 GET /[user]/put/[ball]
 GET /[user]/wait_for/[ball]
 
+# See all balls:
+GET /balls
+
 # Example
 GET /dude/hold/ball
 GET /bro/hold/ball # 405 status code
