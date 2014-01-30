@@ -16,8 +16,6 @@ GET /bro/hold/ball
 
 ```
 
-Ex
-
 Todo:
 =====
 - Request key
