@@ -1,7 +1,7 @@
 #!/bin/sh -ex
 
 npm install
-bower install
+./node_moduled/bower/bin/bower install
 rm -rf public/lib/
 mkdir public/lib/
 ln -s ../../bower_components/angular/ public/lib/angular
