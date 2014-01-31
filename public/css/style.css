@@ -1,0 +1,9 @@
+.ball_wrapper{
+  border: 1px solid #dddddd;
+  padding: 12px 20px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+.ball_wrapper h3{
+	margin-top: 4px;
+}

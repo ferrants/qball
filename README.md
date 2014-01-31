@@ -6,21 +6,22 @@ Web API:
 ========
 ```
 # How to use
-GET /[user]/hold/[ball]
-GET /[user]/put/[ball]
-GET /[user]/wait_for/[ball]
+GET /[user]/hold/[ball]     # take the ball
+GET /[user]/put/[ball]      # return the ball
+GET /[user]/wait_for/[ball] # wait in line for ball
 
-# Info
-GET /balls
-GET /balls/[ball]
+# Admin
+GET /balls                  # show all balls
+GET /balls/[ball]           # show ball info
+GET /balls/[ball]/drop      # destroy the ball
+GET /balls/[ball]/clear     # clear ball's queue and holder
 
 # Sample Flow
 GET /dude/hold/ball
-GET /bro/hold/ball # 405 Status Code
+GET /bro/hold/ball          # 405 Status Code, failed
 GET /bro/wait_for/ball
 GET /dude/put/ball
 GET /bro/hold/ball
-
 ```
 
 See test/test.coffee for examples

@@ -103,7 +103,35 @@ setup_server = () ->
   app.get '/balls/:ball_name', (req, res) ->
     ball_name = "#{req.params.ball_name}"
     console.log "-- see #{ball_name}"
-    res.send balls[ball_name]
+    if ball_name of balls
+      res.send balls[ball_name]
+    else
+      res.status(404)
+      res.send {'error': 'no ball'}
+
+  app.get '/balls/:ball_name/drop', (req, res) ->
+    ball_name = "#{req.params.ball_name}"
+    console.log "-- drop #{ball_name}"
+    if ball_name of balls
+      b = balls[ball_name]
+      delete balls[ball_name]
+      write_balls()
+      res.send b
+    else
+      res.status(404)
+      res.send {'error': 'no ball'}
+
+  app.get '/balls/:ball_name/clear', (req, res) ->
+    ball_name = "#{req.params.ball_name}"
+    console.log "-- clear #{ball_name} queue"
+    if ball_name of balls
+      balls[ball_name].holder = false
+      balls[ball_name].list = []
+      write_balls()
+      res.send balls[ball_name]
+    else
+      res.status(404)
+      res.send {'error': 'no ball'}
 
   app.use (req, res) ->
     console.log "-- unrecognized"
