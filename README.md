@@ -26,6 +26,9 @@ GET /bro/hold/ball
 
 See test/test.coffee for examples
 
+Integrations
+============
+- Python: qball-python (https://github.com/ferrants/qball-python)
 
 Todo:
 =====
