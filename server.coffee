@@ -133,6 +133,30 @@ setup_server = () ->
       res.status(404)
       res.send {'error': 'no ball'}
 
+  app.get '/balls/:ball_name/kick', (req, res) ->
+    ball_name = "#{req.params.ball_name}"
+    console.log "-- kick holder of #{ball_name}"
+    if ball_name of balls
+      balls[ball_name].holder = false
+      write_balls()
+      res.send balls[ball_name]
+    else
+      res.status(404)
+      res.send {'error': 'no ball'}
+
+  app.get '/balls/:ball_name/rotate', (req, res) ->
+    ball_name = "#{req.params.ball_name}"
+    console.log "-- rotate queue of #{ball_name}"
+    if ball_name of balls
+      b = balls[ball_name].list.shift()
+      if b
+        balls[ball_name].list.push(b)
+      write_balls()
+      res.send balls[ball_name]
+    else
+      res.status(404)
+      res.send {'error': 'no ball'}
+
   app.use (req, res) ->
     console.log "-- unrecognized"
     res.status(404)
