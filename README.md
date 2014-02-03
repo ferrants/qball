@@ -13,12 +13,15 @@ GET /[user]/wait_for/[ball] # wait in line for ball
 # Admin
 GET /balls                  # show all balls
 GET /balls/[ball]           # show ball info
-GET /balls/[ball]/drop      # destroy the ball
+GET /balls/[ball]/kick      # kick holder of ball
+GET /balls/[ball]/rotate    # move person first in ball's queue to the end
 GET /balls/[ball]/clear     # clear ball's queue and holder
+GET /balls/[ball]/drop      # destroy the ball
+
 
 # Sample Flow
 GET /dude/hold/ball
-GET /bro/hold/ball          # 405 Status Code, failed
+GET /bro/hold/ball          # 405 Status Code
 GET /bro/wait_for/ball
 GET /dude/put/ball
 GET /bro/hold/ball
