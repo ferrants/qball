@@ -91,7 +91,7 @@ setup_server = () ->
     if not (ball_name of balls)
       balls[ball_name] = new_ball ball_name
 
-    if balls[ball_name].holder == false
+    if user_name in balls[ball_name].list or (balls[ball_name].holder == false and balls[ball_name].list.length == 0)
       res.status(405)
     
     else
