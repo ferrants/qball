@@ -194,3 +194,15 @@ describe 'ball | ', () ->
 			ae false, data.holder
 			ae 0, data.list.length
 			cb()
+
+	it 'dude cant wait in line for a ball he holds', (cb) ->
+		ball = @ball
+		get_json "/dude/hold/#{ball}", (status, data) ->
+			ae data.holder, 'dude'
+			ae data.ball_name, ball
+			get_json "/dude/wait_for/#{ball}", (status, data) ->
+				ae 405, status
+				ae 'dude', data.holder
+				ae ball, data.ball_name
+				ae 0, data.list.length
+				cb()
