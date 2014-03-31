@@ -100,6 +100,19 @@ setup_server = () ->
        
     res.send balls[ball_name]
 
+  app.get '/:user_name/stop_wait_for/:ball_name', (req, res) ->
+    user_name = "#{req.params.user_name}"
+    ball_name = "#{req.params.ball_name}"
+    console.log "-- #{user_name} stops waiting for #{ball_name}"
+    if not (ball_name of balls)
+      res.status(405)
+    else if not (user_name in balls[ball_name].list)
+      res.status(405)
+    else
+      balls[ball_name].list.splice(balls[ball_name].list.indexOf(user_name), 1)
+      write_balls()
+    res.send balls[ball_name]
+
   app.get '/balls/:ball_name', (req, res) ->
     ball_name = "#{req.params.ball_name}"
     console.log "-- see #{ball_name}"

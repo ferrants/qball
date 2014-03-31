@@ -27,7 +27,11 @@
   					<dt>Holder</dt>
   					<dd>{{ ball_meta.holder }}</dd>
   					<dt>List</dt>
-  					<dd>{{ ball_meta.list }}</dd>
+  					<dd>
+              <ol>
+                <li ng-repeat="user in ball_meta.list">{{ user }} <a href='#' ng-click="hit(user, 'stop_wait_for', ball_name)">x</a></li>
+              </ol>
+            </dd>
   				</dl>
   			</div>
         </div>

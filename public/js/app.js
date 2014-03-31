@@ -16,7 +16,13 @@ qball.controller('QBallControl', function($scope, $http){
 
   $scope.use_ball = function(action, ball_name){
     console.log(ball_name);
-    $http.get('/balls/' + ball_name + '/' + action).success(function(data) {
+    $scope.hit('balls', ball_name, action);
+  };
+
+  $scope.hit = function(p1, p2, p3){
+    var url = '/' + [p1, p2, p3].join('/');
+    console.log(url)
+    $http.get(url).success(function(data) {
       $scope.refresh_balls()
     });
   };

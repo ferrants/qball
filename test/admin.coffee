@@ -137,3 +137,32 @@ describe 'admin | ', () ->
 					ae 0, data.list.length
 					cb()
 
+	it 'allows someone to stop waiting for a ball', (cb) ->
+		ball = @ball
+		get_json "/dude/hold/#{ball}", (status, data) ->
+			ae data.holder, 'dude'
+			ae data.ball_name, ball
+			get_json "/bro/wait_for/#{ball}", (status, data) ->
+				ae 200, status
+				ae 'dude', data.holder
+				ae ball, data.ball_name
+				ae 1, data.list.length
+				ae 'bro', data.list[0]
+				get_json "/bro/stop_wait_for/#{ball}", (status, data) ->
+					ae 200, status
+					ae 'dude', data.holder
+					ae ball, data.ball_name
+					ae 0, data.list.length
+					cb()
+
+	it 'doesnt allow someone to stop waiting for a ball theyre not waiting for', (cb) ->
+		ball = @ball
+		get_json "/dude/hold/#{ball}", (status, data) ->
+			ae data.holder, 'dude'
+			ae data.ball_name, ball
+			get_json "/bro/stop_wait_for/#{ball}", (status, data) ->
+				ae 405, status
+				ae 'dude', data.holder
+				ae ball, data.ball_name
+				ae 0, data.list.length
+				cb()
