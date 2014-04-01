@@ -17,6 +17,7 @@
   "dependencies": {
     "bootstrap": "~3.0.0",
     "angular": "",
-    "jquery": ""
+    "jquery": "",
+    "momentjs": "~2.5.1"
   }
 }

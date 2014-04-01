@@ -1,5 +1,11 @@
 var qball = angular.module('qball', []);
 
+qball.filter('fromNow', function() {
+  return function(date) {
+    return moment(date).fromNow();
+  }
+});
+
 qball.controller('QBallControl', function($scope, $http){
   $scope.data = {'balls': {}};
 

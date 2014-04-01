@@ -89,9 +89,13 @@ exports.post_json = (url, params, cb) ->
 	req.end()
 
 exports.App_Runner = class App_Runner
-	start: (cb) ->
+	start: (cb, env={}) ->
 		spawn = require('child_process').spawn
-		@server_proc  = spawn 'coffee', ['./server.coffee']
+		opts = { cwd: undefined, env: process.env}
+		for k,v of env
+			opts.env[k] = v
+		logger.log opts
+		@server_proc  = spawn 'coffee', ['./server.coffee'], opts
 		called_back = false
 		@server_proc.stdout.on 'data', (data) ->
 			logger.log 'stdout: ' + data

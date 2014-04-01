@@ -12,28 +12,34 @@
     <div class='container'>
 
       <div ng-controller="QBallControl">
-      	<button class='btn btn-default pull-right' ng-click="refresh_balls()">Refresh</button>
+        <button class='btn btn-default pull-right' ng-click="refresh_balls()">Refresh</button>
         <h1>QBall</h1>
         <div ng-init="refresh_balls()">
-  			<div class='ball_wrapper' ng-repeat="(ball_name, ball_meta) in balls()">
-  				<div class='pull-right btn-group'>
-  					<button class='btn btn-default' ng-click="use_ball('kick', ball_name)">Kick</button>
-  					<button class='btn btn-default' ng-click="use_ball('rotate', ball_name)">Rotate</button>
-  					<button class='btn btn-default' ng-click="use_ball('clear', ball_name)">Clear</button>
-  					<button class='btn btn-default' ng-click="use_ball('drop', ball_name)">Drop</button>
-  				</div>
-  				<h3>{{ ball_name }}</h3>
-  				<dl class="dl-horizontal">
-  					<dt>Holder</dt>
-  					<dd>{{ ball_meta.holder }}</dd>
-  					<dt>List</dt>
-  					<dd>
+        <div class='ball_wrapper' ng-repeat="(ball_name, ball_meta) in balls()">
+          <div class='pull-right btn-group' ng-switch="ball_meta.auto_admin">
+            <button class='btn btn-default' ng-click="use_ball('kick', ball_name)">Kick</button>
+            <button class='btn btn-default' ng-click="use_ball('rotate', ball_name)">Rotate</button>
+            <button class='btn btn-default' ng-click="use_ball('clear', ball_name)">Clear</button>
+            <button class='btn btn-default' ng-click="use_ball('drop', ball_name)">Drop</button>
+            <button ng-switch-when="true" class='btn btn-default' ng-click="use_ball('auto_admin', ball_name)">Disable Auto Admin</button>
+            <button ng-switch-when="false" class='btn btn-default' ng-click="use_ball('auto_admin', ball_name)">Enable Auto Admin</button>
+          </div>
+          <h3>{{ ball_name }}</h3>
+          <dl class="dl-horizontal">
+            <dt>Holder</dt>
+            <dd>{{ ball_meta.holder }}</dd>
+            <dt>Last Holder Change</dt>
+            <dd>{{ ball_meta.last_modified | fromNow }}</dd>
+            <dt>Last Event</dt>
+            <dd>{{ ball_meta.message }}</dd>
+            <dt>Queue</dt>
+            <dd>
               <ol>
                 <li ng-repeat="user in ball_meta.list">{{ user }} <a href='#' ng-click="hit(user, 'stop_wait_for', ball_name)">x</a></li>
               </ol>
             </dd>
-  				</dl>
-  			</div>
+          </dl>
+        </div>
         </div>
         
 
@@ -54,7 +60,7 @@ GET /balls/[ball]/kick           # kick holder of ball
 GET /balls/[ball]/rotate         # move person first in ball's queue to the end
 GET /balls/[ball]/clear          # clear ball's queue and holder
 GET /balls/[ball]/drop           # destroy the ball
-
+GET /balls/[ball]/auto_admin     # toggle automatic administration
 
 # Sample Flow
 GET /dude/hold/ball
@@ -62,11 +68,12 @@ GET /bro/hold/ball               # 405 Status Code
 GET /bro/wait_for/ball
 GET /dude/put/ball
 GET /bro/hold/ball
-	</pre>
+  </pre>
       Developed by <a target='_blank' href='http://github.com/ferrants'>Matt Ferrante</a>. See <a target='_blank' href='http://github.com/ferrants/qball'>source code</a> on Github.
     </div>
 
     <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/momentjs/moment.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/lib/angular/angular.min.js"></script>
     <script src="/js/app.js"></script>
