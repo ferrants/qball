@@ -52,3 +52,7 @@ Integrations
 ============
 - Python: qball-python (https://github.com/ferrants/qball-python)
 
+Docker
+======
+Docker is now supported, see ferrants/qball
+
