@@ -13,6 +13,9 @@ coffee server.coffee
 
 # Run on port 9090
 HTTP_PORT=9090 coffee server.coffee
+
+# Or run with docker
+docker run -p 8080:8080 ferrants/qball
 ```
 
 Admin:
@@ -54,5 +57,4 @@ Integrations
 
 Docker
 ======
-Docker is now supported, see ferrants/qball
-
+Docker is now supported, see (https://registry.hub.docker.com/u/ferrants/qball/)
