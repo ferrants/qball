@@ -57,4 +57,4 @@ Integrations
 
 Docker
 ======
-Docker is now supported, see (https://registry.hub.docker.com/u/ferrants/qball/)
+Docker is now supported, see (https://registry.hub.docker.com/u/dataxu/qball/)
